@@ -1,0 +1,256 @@
+/* ============================================================
+   SOPI · mobile.css
+   Ajustes para celular y tablet. Se carga EL ÚLTIMO, así que
+   manda sobre los demás archivos sin tener que tocarlos.
+
+   Tres cortes:
+     ≤ 1024px  tablet en vertical
+     ≤ 760px   celular grande / tablet pequeña
+     ≤ 420px   celular estrecho
+   ============================================================ */
+
+/* Nada se sale del ancho de la pantalla, nunca */
+html, body { max-width: 100%; overflow-x: hidden; }
+.screen--app { max-width: 100vw; }
+
+/* Botón para abrir las listas: oculto en escritorio */
+.col__menu {
+  display: none;
+  width: 34px; height: 34px; padding: 0; margin-right: 2px;
+  border: 0; background: transparent; color: var(--text-2);
+  border-radius: var(--r-sm);
+  align-items: center; justify-content: center; flex: 0 0 auto;
+}
+.col__menu svg { width: 20px; height: 20px; }
+.col__menu:active { background: var(--bg-active); }
+
+/* Fondo oscuro del cajón */
+.scrim {
+  position: fixed; inset: 0; z-index: 44;
+  background: rgba(23, 24, 28, .38);
+  opacity: 0; pointer-events: none; transition: opacity .18s;
+}
+body.side-open .scrim { opacity: 1; pointer-events: auto; }
+body.side-open { overflow: hidden; }
+
+
+/* ════════════════════════════════════════════════════════════
+   ≤ 1024px · TABLET
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+
+  /* Paneles laterales de la derecha: cajones que entran desde el borde */
+  .cd-side {
+    position: fixed; z-index: 50; top: 0; right: 0; bottom: 0;
+    width: min(400px, 92vw);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(100%);
+    transition: transform .2s ease-out;
+  }
+  .cd-side.is-open { transform: none; }
+
+  .cal__legend { display: none; }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   ≤ 760px · CELULAR
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 760px) {
+
+  :root { --rail-w: 52px; }
+
+  .col__menu { display: inline-flex; }
+
+  /* ---- Cajón de listas ---- */
+  .side {
+    position: fixed; z-index: 46;
+    left: var(--rail-w); top: 0; bottom: 0;
+    width: min(268px, 78vw);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(-115%);
+    transition: transform .2s ease-out;
+  }
+  .side.is-open { transform: none; }
+  .nav__item { padding: 10px 10px; font-size: 14px; }   /* más alto para el dedo */
+  .nav__more { display: flex; }                          /* sin hover en táctil */
+
+  /* ---- Columna de tareas ---- */
+  .col__head { padding: 14px 14px 4px; gap: 8px; }
+  .col__title h1 { font-size: 18px; }
+  .col__sub { padding: 0 14px; }
+  .col__body { padding: 6px 14px 28px; }
+
+  /* Formulario de nueva tarea: dos columnas cómodas */
+  .qa { margin: 12px 14px 8px; }
+  .qa__kinds { gap: 6px; }
+  .qa__kind { flex: 1 1 auto; justify-content: center; padding: 7px 8px; }
+  .qa__input { font-size: 16px; }          /* 16px evita el zoom automático en iOS */
+  .qa__row { gap: 8px 6px; }
+  .qa__f { flex: 1 1 calc(50% - 3px); min-width: 0; }
+  .qa__f--days { flex: 1 1 100%; }
+  .qa__days { justify-content: space-between; }
+  .qa__day { flex: 1; height: 38px; }
+  .qa__c { padding: 9px 8px; font-size: 15px; }
+  .qa__go { flex: 1 1 100%; padding: 11px; font-size: 15px; }
+
+  /* Filas de tarea: acciones siempre visibles (no hay hover) */
+  .task { padding: 11px 8px; }
+  .task__actions { display: flex; }
+  .task__box { width: 22px; height: 22px; flex-basis: 22px; }
+  .task__box svg { width: 14px; height: 14px; }
+
+  /* Paneles de detalle a pantalla casi completa */
+  .detail, .hb-detail, .cd-side { width: min(400px, 92vw); }
+
+  /* ---- Calendario ---- */
+  .cal__head { padding: 12px 14px 10px; gap: 10px; }
+  .cal__title { font-size: 16px; }
+  .cal__tools { gap: 6px; }
+  .cal__tools .btn--sm { padding: 5px 9px; font-size: 12px; }
+
+  /* La semana se desplaza en horizontal en vez de apretarse */
+  .week { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .week__head, .week__allday, .week__grid { min-width: 620px; }
+
+  .month__dows span { padding: 6px 4px; font-size: 10px; }
+  .day { padding: 4px 4px 5px; }
+  .chip-task { font-size: 10.5px; padding: 2px 4px; }
+  .day__num { font-size: 11.5px; min-width: 21px; }
+
+  /* ---- Matriz de Eisenhower ---- */
+  .mx__head { padding: 14px 14px 10px; }
+  .mx__titles h1 { font-size: 18px; }
+  .mx__grid { padding: 12px 14px; gap: 10px; }
+  .mcard__actions { display: flex; }
+  .mx__foot { padding: 12px 14px 14px; }
+
+  /* ---- Hábitos ---- */
+  .hb__head { padding: 14px 14px 10px; }
+  .hb__nav h1 { font-size: 18px; }
+  .hb__today { margin: 0 14px 12px; padding: 12px; }
+  .hb__table { padding: 0 14px 24px; overflow-x: auto; }
+  .hb-row { grid-template-columns: minmax(120px, 1fr) repeat(7, 34px) 46px; min-width: 0; }
+  .dot { width: 26px; height: 26px; }      /* más grande para el dedo */
+  .hb-row__title { font-size: 13px; }
+  .hb__add { max-width: 100%; }
+
+  /* ---- Cronómetro ---- */
+  .pm { padding: 18px 14px 28px; gap: 14px; }
+  .pm-clock { width: min(230px, 62vw); }
+  .pm__task { width: 100%; }
+  .pm__controls { width: 100%; }
+  .pm__main { flex: 1 1 100%; }
+
+  /* ---- Cuenta atrás ---- */
+  .cd { padding: 14px 14px 26px; }
+  .cd__head h1 { font-size: 18px; }
+  .cd-hero { padding: 14px 15px; }
+  .cd-hero__t h2 { font-size: 17px; }
+  .cd-hero__nums { gap: 6px; }
+  .cd-hero__u { min-width: 0; padding: 8px 4px; }
+  .cd-hero__u span { font-size: 22px; }
+  .cd__grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+  /* ---- Diálogos y avisos ---- */
+  .dlg { padding: 18px 18px 16px; }
+  .dlg__actions .btn { flex: 1 1 auto; min-width: 0; }
+  .toasts { bottom: 14px; width: calc(100% - 28px); }
+  .toast { text-align: center; }
+  .banner { top: 8px; font-size: 12px; padding: 8px 12px; }
+
+  /* ---- Autenticación ---- */
+  .auth-card { padding: 24px 20px 20px; }
+  .field input { font-size: 16px; }        /* evita el zoom de iOS al enfocar */
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   ≤ 420px · CELULAR ESTRECHO
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 420px) {
+
+  :root { --rail-w: 48px; }
+
+  .rail__btn { width: 34px; height: 34px; }
+  .rail__btn svg { width: 18px; height: 18px; }
+  .rail__btn::after { display: none; }     /* los tooltips estorban en táctil */
+
+  .col__title h1 { font-size: 17px; }
+
+  /* El formulario pasa a una sola columna */
+  .qa__f { flex: 1 1 100%; }
+  .qa__kind span { font-size: 11.5px; }
+
+  /* Mes: solo dos tareas por día, el resto tras "+N más" */
+  .day__items .chip-task:nth-child(n+3) { display: none; }
+  .day { min-height: 62px; }
+
+  .hb-row { grid-template-columns: minmax(96px, 1fr) repeat(7, 30px) 40px; }
+  .dot { width: 24px; height: 24px; }
+  .hb-day__n { font-size: 11px; }
+
+  .cd-hero__nums { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .cd-hero__u span { font-size: 19px; }
+  .cd-hero__u small { font-size: 9.5px; }
+
+  .pm-clock__t { font-size: 40px; }
+  .mx__grid { padding: 10px; }
+  .dlg__actions { flex-direction: column-reverse; }
+  .dlg__actions .btn { width: 100%; }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   ≤ 520px · VISTA MES COMO EL CALENDARIO DEL TELÉFONO
+   En 7 columnas no cabe ningún título, así que cada tarea pasa a
+   ser un punto de su color. Tocando el día se abre esa semana,
+   donde sí se lee todo y se puede escribir.
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 520px) {
+
+  .day { cursor: pointer; }
+  .day__items {
+    flex-direction: row; flex-wrap: wrap;
+    gap: 3px; padding-top: 3px; align-content: flex-start;
+  }
+  .day__items .chip-task {
+    width: 7px; height: 7px; min-width: 7px; padding: 0;
+    border: 0; border-radius: 50%;
+    background: var(--c); overflow: hidden;
+  }
+  .day__items .chip-task > * { display: none; }
+  .day__items .chip-task:nth-child(n+5) { display: none; }
+  .day__items .chip-task.is-done { opacity: .35; }
+
+  .day__more {
+    font-size: 9px; padding: 0 3px; margin-top: 1px;
+    background: var(--bg-active); border-radius: 6px;
+  }
+
+  /* Ese botón ocupa media cabecera y aquí no hace falta */
+  .cal__tools .btn--sm:not(.seg__btn) { display: none; }
+  .cal__head { padding-bottom: 6px; }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   Pantallas táctiles: sin efectos que dependan del cursor
+   ════════════════════════════════════════════════════════════ */
+@media (hover: none) {
+  .task__actions, .mcard__actions, .nav__more { display: flex; }
+  .task:hover, .nav__item:hover { background: transparent; }
+  .nav__item.is-active { background: var(--bg-active); }
+  .cd-card:hover, .cd-hero:hover { transform: none; box-shadow: none; }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   Pantalla apaisada muy baja (celular de lado)
+   ════════════════════════════════════════════════════════════ */
+@media (max-height: 460px) and (orientation: landscape) {
+  .pm-clock { width: min(170px, 40vh); }
+  .pm { padding-top: 10px; gap: 10px; }
+  .auth-card { padding: 18px 20px 14px; }
+  .auth-question { margin: 12px 0 10px; padding: 8px 12px; }
+}

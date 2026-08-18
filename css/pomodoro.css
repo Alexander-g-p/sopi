@@ -1,0 +1,148 @@
+/* ============================================================
+   SOPI · pomodoro.css  —  Módulo 5 (Cronómetro)
+   ============================================================ */
+
+.pm{
+  flex:1 1 auto; min-width:0; background:#fff;
+  display:flex; flex-direction:column; align-items:center;
+  padding:26px 24px 32px; overflow-y:auto; gap:18px;
+}
+
+/* Pestañas de modo */
+.pm__tabs{ margin:0; }
+.pm__tabs .seg__btn{ padding:7px 16px; font-size:13px; }
+
+/* ---------- Reloj ---------- */
+.pm-clock{
+  --p:0; --c:var(--red);
+  width:min(300px, 60vw); aspect-ratio:1; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:conic-gradient(var(--c) calc(var(--p) * 1%), var(--bg-active) 0);
+  transition:background .25s linear;
+}
+.pm-clock__in{
+  width:calc(100% - 22px); height:calc(100% - 22px); border-radius:50%;
+  background:#fff; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:2px;
+  box-shadow:inset 0 0 0 1px var(--border);
+}
+.pm-clock__t{
+  font-size:clamp(38px, 7vw, 56px); font-weight:300; letter-spacing:-1px;
+  font-variant-numeric:tabular-nums; line-height:1.05;
+}
+.pm-clock__m{ font-size:12.5px; color:var(--text-2); }
+
+/* ---------- Ciclos ---------- */
+.pm__cyclewrap{ display:flex; flex-direction:column; align-items:center; gap:5px; }
+.pm__cycles{ display:flex; gap:6px; }
+.pm__dot{
+  width:9px; height:9px; border-radius:50%;
+  background:var(--bg-active); box-shadow:inset 0 0 0 1px var(--border-2);
+}
+.pm__dot.is-on{ background:var(--red); box-shadow:none; }
+.pm__cyclelabel{ font-size:11.5px; color:var(--text-3); }
+
+/* ---------- Controles ---------- */
+.pm__controls{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:center; }
+.pm__main{ min-width:118px; padding:10px 20px; font-size:14px; }
+
+/* ---------- Tarea asociada ---------- */
+.pm__task{
+  width:min(400px, 100%); display:flex; flex-direction:column; gap:6px;
+  background:var(--bg-soft); border:1px solid var(--border);
+  border-radius:var(--r); padding:12px 14px;
+}
+.pm__label{
+  font-size:10.5px; font-weight:700; letter-spacing:.6px;
+  text-transform:uppercase; color:var(--text-3);
+}
+.pm__select{ background:#fff; }
+.pm__taskmeta{
+  display:flex; flex-wrap:wrap; align-items:center; gap:4px 12px;
+  font-size:11.5px; color:var(--text-2);
+}
+.pm__open{
+  border:0; background:transparent; color:var(--blue);
+  padding:0; font-size:11.5px; font-weight:600; text-decoration:underline;
+}
+.pm__hint{ margin:0; font-size:11.5px; color:var(--text-3); text-align:center; }
+
+/* ---------- Panel lateral ---------- */
+.pm-side{
+  width:300px; flex:0 0 300px; min-width:0;
+  border-left:1px solid var(--border); background:var(--bg-soft);
+  display:flex; flex-direction:column; padding:14px 14px 18px; overflow-y:auto;
+}
+.pm-side__head h2{ margin:0 0 4px; font-size:15px; }
+
+.pm-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:8px; }
+.pm-stat{
+  background:#fff; border:1px solid var(--border); border-radius:var(--r-sm);
+  padding:9px 10px; display:flex; flex-direction:column; gap:1px;
+}
+.pm-stat strong{ font-size:15px; font-variant-numeric:tabular-nums; }
+.pm-stat small{ font-size:10.5px; color:var(--text-3); }
+
+/* Barras de la semana */
+.pm-chart{
+  display:flex; align-items:flex-end; gap:6px; height:92px;
+  background:#fff; border:1px solid var(--border); border-radius:var(--r-sm);
+  padding:9px 10px 6px;
+}
+.pm-chart__col{
+  flex:1; display:flex; flex-direction:column; align-items:center;
+  justify-content:flex-end; gap:5px; height:100%;
+}
+.pm-chart__bar{
+  width:100%; max-width:22px; border-radius:4px 4px 2px 2px;
+  background:var(--blue-soft); box-shadow:inset 0 0 0 1px rgba(71,114,250,.25);
+}
+.pm-chart__col.is-today .pm-chart__bar{ background:var(--blue); box-shadow:none; }
+.pm-chart__d{ font-size:10px; color:var(--text-3); }
+.pm-chart__col.is-today .pm-chart__d{ color:var(--blue); font-weight:700; }
+
+/* Registro del día */
+.pm-log{ display:flex; flex-direction:column; gap:3px; max-height:190px; overflow-y:auto; }
+.pm-log__empty{ margin:0; padding:12px 4px; font-size:12px; color:var(--text-3); }
+.pm-log__i{
+  display:flex; align-items:center; gap:7px;
+  background:#fff; border:1px solid var(--border);
+  border-radius:var(--r-sm); padding:6px 9px; font-size:12px;
+}
+.pm-log__dot{ width:7px; height:7px; border-radius:50%; flex:0 0 7px; }
+.pm-log__t{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.pm-log__m{ color:var(--text-2); font-variant-numeric:tabular-nums; }
+.pm-log__h{ color:var(--text-3); font-size:10.5px; font-variant-numeric:tabular-nums; }
+.pm-log__i.is-focus .pm-log__t{ font-weight:500; }
+
+/* Ajustes */
+.pm-cfg{ display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+.pm-cfg__f{ display:flex; flex-direction:column; gap:4px; }
+.pm-cfg__f span{ font-size:11px; color:var(--text-2); }
+.pm-cfg__f input{ background:#fff; }
+
+.pm-opts{ display:flex; flex-direction:column; gap:4px; margin-top:12px; }
+.pm-opt{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  font-size:12.5px; color:var(--text-2); padding:4px 0;
+}
+.sw{
+  width:38px; height:21px; border-radius:20px; border:0; padding:2px;
+  background:var(--border-2); display:flex; align-items:center;
+  transition:background .15s;
+}
+.sw__k{
+  width:17px; height:17px; border-radius:50%; background:#fff;
+  box-shadow:var(--shadow-sm); transition:transform .15s;
+}
+.sw.is-on{ background:var(--blue); }
+.sw.is-on .sw__k{ transform:translateX(17px); }
+
+/* ---------- Responsive ---------- */
+@media (max-width:1180px){
+  .pm-side{ width:262px; flex-basis:262px; }
+}
+@media (max-width:900px){
+  .pm-side{ display:none; }
+  .pm-clock{ width:min(260px, 70vw); }
+}
