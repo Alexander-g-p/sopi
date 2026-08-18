@@ -19,6 +19,6 @@
    ============================================================ */
 
 window.SOPI_CONFIG = {
-  supabaseUrl: '',      // ej: 'https://abcdefghijklm.supabase.co'
-  supabaseAnonKey: '',  // ej: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+  supabaseUrl: 'https://ppxybyrulabskhqbozay.supabase.co',      // ej: 'https://abcdefghijklm.supabase.co'
+  supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBweHlieXJ1bGFic2tocWJvemF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwMjE0NDAsImV4cCI6MjEwMjU5NzQ0MH0.fQ52zCGszj9CS0ONmv9z7MLAfMoMp6l01OiENiD-8Ps',  // ej: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
 };
